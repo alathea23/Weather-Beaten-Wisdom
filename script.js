@@ -8,6 +8,8 @@
 //WHEN I click on a city in the search history
 //THEN I am again presented with current and future conditions for that city
 
+
+//setting up basic variables
 const form = document.querySelector('#form');
 var searchCity = document.querySelector('#searchCity')
 var searchState = document.querySelector('#searchState')
@@ -21,25 +23,28 @@ var state = '';
 var countryCode = '';
 var searchBtn = document.querySelector('#searchbutton');
 const apiKey = "c5fdaf1d4bca79e9226907e1b4e3b623"
+const searchDisplay = document.querySelector(".searchResults")
+const currentIcon = document.querySelector("#currentIcon")
 
 console.log("variables established")
 
-console.log(apiURL)
 
 //testing URL creation
 //function URLTEST() {
-   // let lat = "LATUTUDE"
-   // let lon = "LONGITUDE"
-  //  apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey)
-   // console.log(apiURL)
+// let lat = "LATUTUDE"
+// let lon = "LONGITUDE"
+//  apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey)
+// console.log(apiURL)
 //}
 
 //URLTEST()
 
 //function addWeatherToPage(respData)
 
+//adding event listener to search button
 searchBtn.addEventListener("click", function search(event) {
     event.preventDefault();
+    //setting parameters from form inputs
     city = searchCity.value;
     state = searchState.value;
     countryCode = searchCountry.value;
@@ -48,24 +53,31 @@ searchBtn.addEventListener("click", function search(event) {
     var geoapiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + countryCode + "&limit=1&appid=" + apiKey
 
     console.log(geoapiURL)
+    //setting up first API call to translate to lat/lon coordinates
     fetch(geoapiURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
             console.log(data);
+            //capturing coordinates
             let lat = data[0].lat
             let lon = data[0].lon
             var apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey)
 
             console.log(apiURL)
-
+            //setting up second API call to get weather
             fetch(apiURL)
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (data) {
+                    //writing weather results to display on the page
+                    searchDisplay.setAttribute.remove("hide")
                     console.log(data);
+                    let icon = current.weather.icon
+                    //source javascript image.src code: https://softauthor.com/javascript-working-with-images/
+                    currentIcon.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png"
                 });
         });
 
