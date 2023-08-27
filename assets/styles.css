@@ -13,14 +13,15 @@ body {
     width: 100% !important;
     margin: 0% !important;
 }
+
 .navbar {
     background-color: rgb(36, 10, 79) !important;
-    color: aliceblue; 
+    color: aliceblue;
     width: 100% !important;
 }
 
 .coverphoto {
-    width: 100% !important;
+    width: 100vw !important;
     display: cover;
     height: 25vw !important;
     margin-bottom: 0% !important;
@@ -54,11 +55,12 @@ h3 {
     font-weight: 900;
 }
 
-.searchtitle, #resultName {
-        color: rgb(88, 108, 208) !important;
-        padding: 2% !important;
-        justify-content: center !important;
-        font-weight: 900 !important;   
+.searchtitle,
+#resultName {
+    color: rgb(88, 108, 208) !important;
+    padding: 2% !important;
+    justify-content: center !important;
+    font-weight: 900 !important;
 }
 
 #resultName {
@@ -68,7 +70,7 @@ h3 {
 .container-test {
     display: flex;
     width: 100vw;
-    margin: 0 !important;  
+    margin: 0 !important;
 }
 
 .past-search {
@@ -76,7 +78,7 @@ h3 {
     align-content: center;
     align-items: center;
     background-color: rgb(205, 200, 206);
-    
+
 }
 
 #past {
@@ -104,7 +106,7 @@ h3 {
 }
 
 form {
-  
+
     background-color: rgb(195, 227, 241);
     padding: 3%;
     margin-left: 5% !important;
@@ -119,18 +121,21 @@ form {
 
 .forecast {
     display: flex;
-margin: 4% !important;
-justify-content: space-evenly;
-border-bottom: midnightblue;
-border-bottom-style: ridge;
-vertical-align: middle !important;
+    margin: 4% !important;
+    justify-content: space-evenly;
+    border-bottom: midnightblue;
+    border-bottom-style: ridge;
+    vertical-align: middle !important;
 }
 
 .searchresults {
     display: flex;
 }
 
-#resultDate, #resultTemp, #resultHumidity, #resultWind {
+#resultDate,
+#resultTemp,
+#resultHumidity,
+#resultWind {
     margin: 2% !important;
     display: flex;
     padding: 1%;
@@ -138,9 +143,56 @@ vertical-align: middle !important;
     vertical-align: middle !important;
 }
 
+#currentDate,
+#currentTemp,
+#currentHumidity,
+#currentWind {
+    display: flex;
+    font-weight: bold;
+    vertical-align: middle !important;
+    justify-content: center !important;
+}
+
+.currentIcon {
+    margin-left: 40% !important;
+}
+
+#currentWind {
+    border-bottom: midnightblue;
+    border-bottom-style: ridge;
+    border-bottom-width: 8px;
+    margin-bottom: 4%;
+}
+
 @media screen and (max-width: 800px) {
-    h2, h3 {
+
+    h2,
+    h3 {
         font-size: 18px;
+    }
+
+    .forecast {
+        margin: 0% !important;
+        font-size: small;
+        justify-content: space-evenly;
+    }
+
+    #resultDate,
+    #resultTemp,
+    #resultHumidity,
+    #resultWind {
+        margin: 0% !important;
+        padding: 1%;
+        font-size: medium;
+    }
+
+    .resultIcon {
+        max-width: 10%;
+        max-height: 10%;
+    }
+
+    #resultDate {
+        min-width: 15%;
     }
 }
 
@@ -151,4 +203,25 @@ vertical-align: middle !important;
         font-size: 16px;
     }
 
+    .forecast {
+        margin: 0% !important;
+        justify-content: space-evenly;
+    }
+
+    #resultDate,
+    #resultTemp,
+    #resultHumidity,
+    #resultWind {
+        margin: 0% !important;
+        padding: 1%;
+    }
+
+    #resultDate {
+        min-width: 12%;
+    }
+
+    .resultIcon {
+        max-width: 7%;
+        max-height: 7%;
+    }
 }

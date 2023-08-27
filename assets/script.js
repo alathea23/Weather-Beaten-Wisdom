@@ -8,10 +8,17 @@ var displayResults = document.querySelector('.searchResults')
 var forecast = document.querySelectorAll('.forecast')
 var resultName = document.querySelector('#resultName')
 var resultDate = document.querySelectorAll('#resultDate')
-var resultIcon = document.querySelectorAll(".currentIcon")
+var resultIcon = document.querySelectorAll(".resultIcon")
 var resultTemp = document.querySelectorAll('#resultTemp')
 var resultHumidity = document.querySelectorAll('#resultHumidity')
 var resultWind = document.querySelectorAll('#resultWind')
+var currentName = document.querySelector('#currentName')
+var currentDate = document.querySelector('#currentDate')
+var currentIcon = document.querySelector(".currentIcon")
+var currentTemp = document.querySelector('#currentTemp')
+var currentHumidity = document.querySelector('#currentHumidity')
+var currentWind = document.querySelector('#currentWind')
+var currentCast = document.querySelector('.currentcast')
 var pastSearch = document.querySelector('#past')
 var searchData = []
 var lat = '';
@@ -109,31 +116,38 @@ pastSearch.addEventListener("click", function searchRetrieval(event) {
             searchDisplay.classList.remove("hide")
             console.log(data)
             resultName.innerHTML = storedSearches[index].location
-            let j = 0
+            //setting current weather
+            currentSrc = data.list[0].weather[0].icon
+            currentIcon.src = "https://openweathermap.org/img/wn/" + currentSrc + "@2x.png";
+            currentTemp.innerHTML = "Temperature: " + data.list[0].main.temp + "º F"
+            currentHumidity.innerHTML = "Humidity: " + data.list[0].main.humidity + "%"
+            currentWind.innerHTML = "Wind Speed: " + data.list[0].wind.speed + "mph"
+            //setting up 5-day forecast
+            let j = 7
             resultDate.forEach(date => {
                 GMTDate = data.list[j].dt_txt
                 date.innerHTML = dayjs(GMTDate).format("MMM D")
                 j = (j + 8)
                 console.log(j)
             })
-            let k = 0
+            let k = 7
             resultIcon.forEach(image => {
                 var icon = data.list[k].weather[0].icon
                 //source javascript image.src code: https://softauthor.com/javascript-working-with-images/
                 image.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
                 k = (k + 8)
             })
-            let l = 0
+            let l = 7
             resultTemp.forEach(temp => {
-                temp.innerHTML = "Temperature: " + data.list[l].main.temp + "º F"
+                temp.innerHTML = "Temp: " + data.list[l].main.temp + "º F"
                 l = (l + 8)
             })
-            let m = 0
+            let m = 7
             resultHumidity.forEach(humidity => {
                 humidity.innerHTML = "Humidity: " + data.list[m].main.humidity + "%"
                 m = (m + 8)
             })
-            let o = 0
+            let o = 7
             resultWind.forEach(wind => {
                 wind.innerHTML = "Wind Speed: " + data.list[o].wind.speed + "mph"
                 o = (o + 8)
@@ -193,23 +207,31 @@ searchBtn.addEventListener("click", function search(event) {
                         searchDisplay.classList.remove("hide")
                         console.log(data)
                         resultName.innerHTML = location
-                        let j = 0
+
+                        //setting current temp
+                        currentSrc = data.list[0].weather[0].icon
+                        currentIcon.src = "https://openweathermap.org/img/wn/" + currentSrc + "@2x.png";
+                        currentTemp.innerHTML = "Temperature: " + data.list[0].main.temp + "º F"
+                        currentHumidity.innerHTML = "Humidity: " + data.list[0].main.humidity + "%"
+                        currentWind.innerHTML = "Wind Speed: " + data.list[0].wind.speed + "mph"
+                        // setting 5-day forecast
+                        let j = 7
                         resultDate.forEach(date => {
                             GMTDate = data.list[j].dt_txt
                             date.innerHTML = dayjs(GMTDate).format("MMM D")
                             j = (j + 8)
                             console.log(j)
                         })
-                        let k = 0
+                        let k = 7
                         resultIcon.forEach(image => {
                             var icon = data.list[k].weather[0].icon
                             //source javascript image.src code: https://softauthor.com/javascript-working-with-images/
                             image.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
                             k = (k + 8)
                         })
-                        let l = 0
+                        let l = 7
                         resultTemp.forEach(temp => {
-                            temp.innerHTML = "Temperature: " + data.list[l].main.temp + "º F"
+                            temp.innerHTML = "Temp: " + data.list[l].main.temp + "º F"
                             l = (l + 8)
                         })
                         let m = 0
@@ -217,7 +239,7 @@ searchBtn.addEventListener("click", function search(event) {
                             humidity.innerHTML = "Humidity: " + data.list[m].main.humidity + "%"
                             m = (m + 8)
                         })
-                        let o = 0
+                        let o = 7
                         resultWind.forEach(wind => {
                             wind.innerHTML = "Wind Speed: " + data.list[o].wind.speed + "mph"
                             o = (o + 8)
