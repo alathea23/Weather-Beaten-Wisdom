@@ -13,11 +13,12 @@
 
     Jenny Wannier Tarzian
 
-    StackOverflow: 
-        https://stackoverflow.com/questions/47858518/highscore-in-local-storage-javascript
+    Free Formatter: 
+        https://www.freeformatter.com/iso-country-list-html-select.html  
 
-    StackOverflow:
-        https://codedamn.com/news/javascript/how-to-fix-typeerror-foreach-is-not-a-function-in-javascript
+    Soft Author:
+        https://softauthor.com/javascript-working-with-images/
+               
 
 
 ## License:
@@ -26,6 +27,6 @@
 
 ## URL:
 
- https://alathea23.github.io/Daily-Diligence-Development/
+ https://github.com/alathea23/Weather-Beaten-Wisdom.git
 
-![Alt text](./Assets/ScreenshotDailyDilligence.png)
+![Alt text](./Assets/Photos/Weather.png)
