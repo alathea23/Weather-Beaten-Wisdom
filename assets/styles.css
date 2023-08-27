@@ -1,16 +1,29 @@
 h1 {
-    width: 100%;
+    width: 120% !important;
     margin-left: 30% !important;
     display: block;
 }
 
 header {
-    padding: 2%;
+    margin: 0 !important;
+    width: 120% !important;
 }
 
+body {
+    width: 100% !important;
+    margin: 0% !important;
+}
 .navbar {
     background-color: rgb(36, 10, 79) !important;
     color: aliceblue; 
+    width: 100% !important;
+}
+
+.coverphoto {
+    width: 100% !important;
+    display: cover;
+    height: 25vw !important;
+    margin-bottom: 0% !important;
 }
 
 .heading {
@@ -21,10 +34,11 @@ header {
     border-color: black;
     border-radius: 5px;
     justify-content: center !important;
-    margin-bottom: 4% !important;
     margin-top: 3% !important;
     margin-left: 2%;
+    margin-bottom: 7%;
     color: white;
+    width: 95% !important;
 }
 
 h2 {
@@ -47,35 +61,54 @@ h3 {
         font-weight: 900 !important;   
 }
 
+#resultName {
+    margin-top: 6%;
+}
+
 .container-test {
     display: flex;
     width: 100vw;
-    margin: 0 !important;
-   
+    margin: 0 !important;  
 }
 
-.column-1 {
-    display: flex;
-    flex: 20vw !important;
-    align-content: center !important;
+.past-search {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: rgb(205, 200, 206);
+    
 }
 
-.column-2 {
-    display: flex;
-    flex: 80%;
+#past {
+    margin-left: 0% !important;
+    width: 95% !important;
 }
 
-li {
+.resultbox {
+    margin-left: 0% !important;
+}
+
+.resultButton {
     border-style: double;
     border-color: black;
     border-radius: 5px;
+    width: 100% !important;
+    margin-bottom: 2%;
+    background-color: rgb(195, 227, 241);
+}
+
+.clearButton {
+    margin-left: 5%;
+    margin-bottom: 8%;
+    border-radius: 3px;
 }
 
 form {
-    width: 80% !important;
+  
     background-color: rgb(195, 227, 241);
     padding: 3%;
-    margin-left: 6%;
+    margin-left: 5% !important;
+    margin-right: 2%;
 }
 
 
@@ -88,6 +121,9 @@ form {
     display: flex;
 margin: 4% !important;
 justify-content: space-evenly;
+border-bottom: midnightblue;
+border-bottom-style: ridge;
+vertical-align: middle !important;
 }
 
 .searchresults {
@@ -95,11 +131,11 @@ justify-content: space-evenly;
 }
 
 #resultDate, #resultTemp, #resultHumidity, #resultWind {
-    margin: 4% !important;
+    margin: 2% !important;
     display: flex;
     padding: 1%;
     font-weight: bold;
-
+    vertical-align: middle !important;
 }
 
 @media screen and (max-width: 800px) {

@@ -1,13 +1,3 @@
-//GIVEN a weather dashboard with form inputs
-//WHEN I search for a city
-//THEN I am presented with current and future conditions for that city and that city is added to the search history
-//WHEN I view current weather conditions for that city
-//THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
-//WHEN I view future weather conditions for that city
-//HEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-//WHEN I click on a city in the search history
-//THEN I am again presented with current and future conditions for that city
-
 
 //setting up basic variables
 const form = document.querySelector('#form');
@@ -53,16 +43,17 @@ function renderPastSearch() {
     pastSearch.innerHTML = "";
 
     for (var i = 0; i < searchData.length; i++) {
-        var pastCity = searchData[i].city;
+        var pastCity = searchData[i].location;
 
-        var li = document.createElement("li");
+        var li = document.createElement("div");
         li.setAttribute("data-index", i);
         li.setAttribute("thiscity", pastCity);
-        li.setAttribute("thislat", i);
-        li.setAttribute("thislon", i);
+        li.classList.add("resultbox")
 
         var button = document.createElement("button");
+        button.setAttribute("data-index", i);
         button.textContent = pastCity;
+        button.classList.add("resultButton")
 
         li.appendChild(button);
         pastSearch.appendChild(li);
@@ -72,7 +63,7 @@ function renderPastSearch() {
 //pulling past searches from local storage
 function init() {
     var storedSearches = JSON.parse(localStorage.getItem("pastsearches"));
-    storedSearches = storedSearches || []
+    searchData = storedSearches || []
     renderPastSearch(searchData);
 }
 
@@ -85,8 +76,6 @@ function clearDOM() {
 }
 
 clearButton.addEventListener("click", clearDOM);
-
-
 
 //adding search city info t local storage
 function storeSearches() {
@@ -102,7 +91,7 @@ pastSearch.addEventListener("click", function searchRetrieval(event) {
     if (element.matches("button") === true) {
         var index = element.parentElement.getAttribute("data-index");
     }
-
+    console.log(index)
     let storedSearches = JSON.parse(localStorage.getItem("pastsearches"))
 
     let lat = storedSearches[index].lat
@@ -119,7 +108,7 @@ pastSearch.addEventListener("click", function searchRetrieval(event) {
             //writing weather results to display on the page
             searchDisplay.classList.remove("hide")
             console.log(data)
-            resultName.innerHTML = city
+            resultName.innerHTML = storedSearches[index].location
             let j = 0
             resultDate.forEach(date => {
                 GMTDate = data.list[j].dt_txt
@@ -151,10 +140,7 @@ pastSearch.addEventListener("click", function searchRetrieval(event) {
             })
         }
         )
-}
-);
-
-
+});
 
 //function addWeatherToPage(respData)
 
@@ -188,7 +174,7 @@ searchBtn.addEventListener("click", function search(event) {
                 console.log(apiURL)
 
                 //storing search info and building list
-                var newSearch = { city, lat, lon }
+                var newSearch = { location, lat, lon }
                 searchData.push(newSearch)
                 searchCity.value = "";
                 searchCountry.value = "";
@@ -236,8 +222,7 @@ searchBtn.addEventListener("click", function search(event) {
                             wind.innerHTML = "Wind Speed: " + data.list[o].wind.speed + "mph"
                             o = (o + 8)
                         })
-                    }
-                    )
+                    })
             }
             else {
                 alert("Your search parameters are not valid.  Please try again.")
