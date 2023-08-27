@@ -23,22 +23,24 @@ header {
     justify-content: center !important;
     margin-bottom: 4% !important;
     margin-top: 3% !important;
+    margin-left: 2%;
     color: white;
 }
 
 h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 8% !important;
+    text-align: center !important;
     font-size: 24px;
+    padding-top: 3%;
 }
 
 h3 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 20% !important;
+    text-align: center !important;
     font-weight: 900;
 }
 
-.searchtitle {
+.searchtitle, #resultName {
         color: rgb(88, 108, 208) !important;
         padding: 2% !important;
         justify-content: center !important;
@@ -63,7 +65,7 @@ h3 {
     flex: 80%;
 }
 
-span {
+li {
     border-style: double;
     border-color: black;
     border-radius: 5px;
@@ -102,7 +104,6 @@ justify-content: space-evenly;
 
 @media screen and (max-width: 800px) {
     h2, h3 {
-        margin-left: 5% !important;
         font-size: 18px;
     }
 }
@@ -114,7 +115,4 @@ justify-content: space-evenly;
         font-size: 16px;
     }
 
-    h3 {
-        margin-left: 5% !important;
-    }
 }

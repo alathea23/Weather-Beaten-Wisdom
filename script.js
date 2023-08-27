@@ -30,6 +30,7 @@ var city = '';
 var state = '';
 var countryCode = '';
 var searchBtn = document.querySelector('#searchbutton');
+var clearButton = document.querySelector('.clearButton')
 const apiKey = "c5fdaf1d4bca79e9226907e1b4e3b623"
 const searchDisplay = document.querySelector(".searchResults")
 
@@ -51,91 +52,108 @@ console.log("variables established")
 function renderPastSearch() {
     pastSearch.innerHTML = "";
 
-    for (var i = 0; i < pastSearch.length; i++) {
-        var pastCity = pastSearch[i];
+    for (var i = 0; i < searchData.length; i++) {
+        var pastCity = searchData[i].city;
 
         var li = document.createElement("li");
         li.setAttribute("data-index", i);
+        li.setAttribute("thiscity", pastCity);
+        li.setAttribute("thislat", i);
+        li.setAttribute("thislon", i);
 
         var button = document.createElement("button");
         button.textContent = pastCity;
 
         li.appendChild(button);
-        todoList.appendChild(li);
+        pastSearch.appendChild(li);
     }
 }
 
 //pulling past searches from local storage
 function init() {
     var storedSearches = JSON.parse(localStorage.getItem("pastsearches"));
-    if (storedSearches !== null) {
-        pastSearch = storedSearches;
-    }
-    renderPastSearch();
+    storedSearches = storedSearches || []
+    renderPastSearch(searchData);
 }
+
+init();
+
+//clearing storage to reset to new day
+function clearDOM() {
+    localStorage.clear("pastsearches");
+    init()
+}
+
+clearButton.addEventListener("click", clearDOM);
+
+
 
 //adding search city info t local storage
 function storeSearches() {
-    localStorage.setItem("pastsearches", JSON.stringify(pastSearch));
+    localStorage.setItem("pastsearches", JSON.stringify(searchData));
+
+    console.log(localStorage.getItem("pastsearches"))
+    console.log(searchData)
 }
 
 //creating search logic to render weather info when past search city clicked
-pastSearch.addEventListener("click", function (event) {
+pastSearch.addEventListener("click", function searchRetrieval(event) {
     var element = event.target;
     if (element.matches("button") === true) {
         var index = element.parentElement.getAttribute("data-index");
-        todos.splice(index, 1);
-        // TODO: What will happen when the following functions are called?
-
-        storeTodos();
-        renderTodos();
-
-        var apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + "&units=imperial")
-
-        fetch(apiURL)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                //writing weather results to display on the page
-                searchDisplay.classList.remove("hide")
-                console.log(data)
-                resultName.innerHTML = city
-                let j = 0
-                resultDate.forEach(date => {
-                    GMTDate = data.list[j].dt_txt
-                    date.innerHTML = dayjs(GMTDate).format("MMM D")
-                    j = (j + 8)
-                    console.log(j)
-                })
-                let k = 0
-                resultIcon.forEach(image => {
-                    var icon = data.list[k].weather[0].icon
-                    //source javascript image.src code: https://softauthor.com/javascript-working-with-images/
-                    image.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
-                    k = (k + 8)
-                })
-                let l = 0
-                resultTemp.forEach(temp => {
-                    temp.innerHTML = "Temperature: " + data.list[l].main.temp + "º F"
-                    l = (l + 8)
-                })
-                let m = 0
-                resultHumidity.forEach(humidity => {
-                    humidity.innerHTML = "Humidity: " + data.list[m].main.humidity + "%"
-                    m = (m + 8)
-                })
-                let o = 0
-                resultWind.forEach(wind => {
-                    wind.innerHTML = "Wind Speed: " + data.list[o].wind.speed + "mph"
-                    o = (o + 8)
-                })
-            }
-            )
     }
-});
 
-init();
+    let storedSearches = JSON.parse(localStorage.getItem("pastsearches"))
+
+    let lat = storedSearches[index].lat
+    let lon = storedSearches[index].lon
+
+    var apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + "&units=imperial")
+    console.log(apiURL)
+
+    fetch(apiURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            //writing weather results to display on the page
+            searchDisplay.classList.remove("hide")
+            console.log(data)
+            resultName.innerHTML = city
+            let j = 0
+            resultDate.forEach(date => {
+                GMTDate = data.list[j].dt_txt
+                date.innerHTML = dayjs(GMTDate).format("MMM D")
+                j = (j + 8)
+                console.log(j)
+            })
+            let k = 0
+            resultIcon.forEach(image => {
+                var icon = data.list[k].weather[0].icon
+                //source javascript image.src code: https://softauthor.com/javascript-working-with-images/
+                image.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+                k = (k + 8)
+            })
+            let l = 0
+            resultTemp.forEach(temp => {
+                temp.innerHTML = "Temperature: " + data.list[l].main.temp + "º F"
+                l = (l + 8)
+            })
+            let m = 0
+            resultHumidity.forEach(humidity => {
+                humidity.innerHTML = "Humidity: " + data.list[m].main.humidity + "%"
+                m = (m + 8)
+            })
+            let o = 0
+            resultWind.forEach(wind => {
+                wind.innerHTML = "Wind Speed: " + data.list[o].wind.speed + "mph"
+                o = (o + 8)
+            })
+        }
+        )
+}
+);
+
 
 
 //function addWeatherToPage(respData)
@@ -162,6 +180,7 @@ searchBtn.addEventListener("click", function search(event) {
             console.log(data);
             //capturing coordinates
             if (data !== undefined) {
+                var location = data[0].name + ", " + data[0].state
                 let lat = data[0].lat
                 let lon = data[0].lon
                 var apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + "&units=imperial")
@@ -169,7 +188,7 @@ searchBtn.addEventListener("click", function search(event) {
                 console.log(apiURL)
 
                 //storing search info and building list
-                var newSearch = [{ city, lat, lon }]
+                var newSearch = { city, lat, lon }
                 searchData.push(newSearch)
                 searchCity.value = "";
                 searchCountry.value = "";
@@ -187,7 +206,7 @@ searchBtn.addEventListener("click", function search(event) {
                         //writing weather results to display on the page
                         searchDisplay.classList.remove("hide")
                         console.log(data)
-                        resultName.innerHTML = city
+                        resultName.innerHTML = location
                         let j = 0
                         resultDate.forEach(date => {
                             GMTDate = data.list[j].dt_txt
