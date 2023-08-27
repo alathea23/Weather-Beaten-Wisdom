@@ -4,7 +4,7 @@
 
 ## Description:
 
-   An app to access weather info for any city; current and 4 day forecast
+    An app to access weather info for any city; current and 4 day forecast
 ## Installing:
 
     Basic hosting through GitHub repository.
@@ -27,6 +27,6 @@
 
 ## URL:
 
- https://github.com/alathea23/Weather-Beaten-Wisdom.git
+ https://alathea23.github.io/Weather-Beaten-Wisdom/
 
 ![Alt text](./Assets/Photos/Weather.png)
