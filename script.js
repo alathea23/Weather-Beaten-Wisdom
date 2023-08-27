@@ -15,6 +15,12 @@ var searchCity = document.querySelector('#searchCity')
 var searchState = document.querySelector('#searchState')
 var searchCountry = document.querySelector('#searchCountry')
 var displayResults = document.querySelector('.searchResults')
+var forecast = document.querySelectorAll('.forecast')
+var resultName = document.querySelector('#resultName')
+var resultDate = document.querySelector('#resultDate')
+var resultTemp = document.querySelector('#resultTemp')
+var resultHumidity = document.querySelector('#resultHumidity')
+var resultWind = document.querySelector('#resultWind')
 var pastSearch = document.querySelector('#past')
 var lat = '';
 var lon = '';
@@ -24,7 +30,7 @@ var countryCode = '';
 var searchBtn = document.querySelector('#searchbutton');
 const apiKey = "c5fdaf1d4bca79e9226907e1b4e3b623"
 const searchDisplay = document.querySelector(".searchResults")
-const currentIcon = document.querySelector("#currentIcon")
+const currentIcon = document.querySelector(".currentIcon")
 
 console.log("variables established")
 
@@ -73,11 +79,16 @@ searchBtn.addEventListener("click", function search(event) {
                 })
                 .then(function (data) {
                     //writing weather results to display on the page
-                    searchDisplay.setAttribute.remove("hide")
+                    searchDisplay.classList.remove("hide")
                     console.log(data);
-                    let icon = current.weather.icon
+                    let icon = data.list[0].weather[0].icon
                     //source javascript image.src code: https://softauthor.com/javascript-working-with-images/
-                    currentIcon.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png"
+                    currentIcon.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+                    resultName.innerHTML = city
+                    resultDate.innerHTML = data.list[0].dt_txt
+                    resultTemp.innerHTML = "Temperature: " + data.list[0].main.temp
+                    resultHumidity.innerHTML = "Humidity: " + data.list[0].main.humidity
+                    resultWind.innerHTML = "Wind Speed: " + data.list[0].wind.speed
                 });
         });
 
