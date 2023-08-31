@@ -180,7 +180,8 @@ searchBtn.addEventListener("click", function search(event) {
             console.log(data);
             //capturing coordinates
             if (data !== undefined) {
-                var location = data[0].name + ", " + data[0].state
+                if (data[0].country == "US") {var location = data[0].name + ", " + data[0].state + ", USA"}
+                else {var location = data[0].name + ", " + data[0].country}
                 let lat = data[0].lat
                 let lon = data[0].lon
                 var apiURL = ('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + "&units=imperial")
