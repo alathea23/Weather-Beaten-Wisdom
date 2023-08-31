@@ -167,7 +167,7 @@ searchBtn.addEventListener("click", function search(event) {
     countryCode = searchCountry.value;
 
     console.log(city, state, countryCode)
-    var geoapiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + countryCode + "&limit=1&appid=" + apiKey
+    var geoapiURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + countryCode + "&limit=1&appid=" + apiKey
 
     console.log(geoapiURL)
 
