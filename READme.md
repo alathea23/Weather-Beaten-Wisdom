@@ -9,6 +9,9 @@
 
     Basic hosting through GitHub repository.
 
+## API:
+    Using openweathermap.org API to access weather data to provide current and 5-day forecast weather info.  Returns data points for every three hours starting in current time.
+
 ## Contributors:
 
     Jenny Wannier Tarzian
