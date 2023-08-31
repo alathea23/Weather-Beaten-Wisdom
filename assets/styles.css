@@ -146,11 +146,15 @@ form {
 #currentDate,
 #currentTemp,
 #currentHumidity,
-#currentWind {
+#currentWind, #forecastLabel  {
     display: flex;
     font-weight: bold;
     vertical-align: middle !important;
     justify-content: center !important;
+}
+
+#currentDate {
+    border-bottom: midnightblue !important;
 }
 
 .currentIcon {
@@ -158,10 +162,17 @@ form {
 }
 
 #currentWind {
+    margin-bottom: 6%;
+}
+
+
+#forecastLabel {
     border-bottom: midnightblue;
     border-bottom-style: ridge;
     border-bottom-width: 8px;
-    margin-bottom: 6%;
+    padding-bottom: 3%;
+    margin-bottom: 1%;
+    color: midnightblue !important;
 }
 
 @media screen and (max-width: 800px) {
